@@ -1,0 +1,128 @@
+﻿@model PVCarlosVamberto.ViewModel.FornecedorCadastroViewModel
+@{
+   ViewBag.Title = "Cadastro";
+}
+
+<h2>Cadastro</h2>
+<form id="formCadastro" method="post">
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+
+            <div class="alert alert-danger" role="alert" id="divAlerta">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <label id="labErro">mensagem</label>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3> Empresa </h3>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4 col-lg-4 col-sm-12 top8px">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">Nome*</span>
+                        <input type="text" class="form-control" id="empresa_nome" name="empresa.Nome" value="@Model.empresa.Nome" maxlength="50">
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-4 col-sm-12 top8px">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">UF*</span>
+                        <input type="text" class="form-control" id="empresa_uf" name="empresa.UF" value="@Model.empresa.UF" maxlength="2" style="text-transform:uppercase">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3> Fornecedor </h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12 top8px">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">Nome*</span>
+                        <input type="text" class="form-control" id="fornecedor_nome" name="fornecedor.Nome" value="@Model.fornecedor.Nome" maxlength="50">
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-md-4 col-sm-12 top8px" id="div_FornCpfCnpj">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">Cpf/Cnpj*</span>                        
+                        <input type="text" name="fornecedor.CpfCnpj" class="form-control" id="fornecedor_cpfcnpj" maxlength="18"/>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-md-4 col-sm-12 top8px" id="div_FornDtNasc">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">DataNasc*</span>
+                        <input type="date" class="form-control" id="fornecedor_datanascimento" nome="fornecedor.DataNascimento.Value" value="@Model.fornecedor.DataNascimento" aria-describedby="basic-addon3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-md-4 col-sm-12 top8px" id="div_FornRg">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="basic-addon3">RG*</span>
+                        <input type="text" class="form-control" id="fornecedor_rg" nome="fornecedor.Rg" value="@Model.fornecedor.Rg" aria-describedby="basic-addon3" placeholder="RG">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3> Telefones </h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-md-4 col-sm-12 top8px">
+                    <div class="input-group">
+                        <input type="text" class="form-control" aria-label="..." id="txtTelefone">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" id="btnAdicionarTel">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-md-4 col-sm-12 top8px">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="table-responsive ">
+                                <table class="table table-hover table-striped table-condensed" id="tabTelefones">
+                                    <thead>
+                                        <tr>
+                                            <th>Telefones Adicionados</th>
+                                            <th width="120px"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-footer text-right">
+            <button type="button" class="btn btn-sm btn-primary" id="btnCancelar">Cancelar</button>
+            <button type="button" class="btn btn-sm btn-primary" id="btnGravar">Gravar</button>
+        </div>
+    </div>
+</form>
+
+@section scripts {
+    <script src="~/Scripts/views/FornecedorCadastro.js"></script>
+    
+}

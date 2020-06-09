@@ -1,0 +1,114 @@
+﻿@model PVCarlosVamberto.ViewModel.FornecedorListaViewModel
+@{
+    ViewBag.Title = "Fornecedores";
+    System.Globalization.CultureInfo brasil = new System.Globalization.CultureInfo("pt-BR");
+
+
+}
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Fornecedores</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nome" name="filtroNome" value="@Model.filtroNome">
+                    <input type="text" class="form-control" placeholder="CpfCnpj" name="filtroCpfCnpj" value="@Model.filtroCpfCnpj">
+                    <input type="date" class="form-control" placeholder="Dt Cad. aaaa-mm-dd" name="filtroDtCadastro" value='@Model.filtroDtCadastro'>
+                </div>
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </form>
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+@if (TempData["SUCESSO"] != null)
+{
+<div class="alert alert-success" role="alert" id="divAlerta">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Sucesso:</span>
+    <label id="labErro">@TempData["SUCESSO"]</label>
+</div>
+}
+
+@if (Model.Retorno != null && Model.Retorno.ErroMensagem.Length > 0)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Erro!</strong> @Model.Retorno.ErroMensagem
+    </div>
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading text-right">        
+        <a href="/Home/Cadastro" class="btn btn-sm btn-primary">Adicionar</a>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive ">
+            <table class="table table-hover table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th width="100px">#</th>
+                        <th>Nome</th>
+                        <th>CpfCnpj</th>
+                        <th>Empresa</th>
+                        <th>Telefones</th>
+                        <th>Dt Cadastro</th>
+                        @*<th width="120px"></th>*@
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @if (Model.lisgagem == null || Model.lisgagem.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center">Nenhum registro encontrado para a consulta.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (PVCarlosVamberto.Domain.Models.Fornecedor fornecedor in Model.lisgagem)
+                        {
+                            <tr>
+                                <td style="vertical-align:middle">@fornecedor.FornecedorId</td>
+                                <td style="vertical-align:middle">@fornecedor.Nome</td>
+                                <td style="vertical-align:middle">@fornecedor.CpfCnpj</td>
+                                <td style="vertical-align:middle">@fornecedor.Empresa.Nome</td>
+                                <td style="vertical-align:middle">
+                                    @foreach (var tel in fornecedor.Telefones)
+                                    {
+                                        @tel.Numero
+                                        <br />
+                                    }
+                                </td>
+                                <td style="vertical-align:middle">@fornecedor.DataCadastro.ToString("dd/MM/yyyy")</td>
+
+                                @*<td style="text-align:right">
+                                    <button class="btn btn-sm btn-primary">ver</button>
+                                    <button class="btn btn-sm btn-danger">excluir</button>
+                                </td>*@
+                            </tr>
+                        }
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
